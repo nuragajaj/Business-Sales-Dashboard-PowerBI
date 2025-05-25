@@ -1,0 +1,198 @@
+-- =====================================================
+-- Business Sales Dashboard - Sample Data Creation
+-- =====================================================
+
+-- Create Sales Database
+CREATE DATABASE IF NOT EXISTS SalesAnalytics;
+USE SalesAnalytics;
+
+-- =====================================================
+-- Create Tables
+-- =====================================================
+
+-- Sales Table
+CREATE TABLE Sales (
+    Order_ID VARCHAR(10) PRIMARY KEY,
+    Region VARCHAR(20) NOT NULL,
+    Sales_Rep VARCHAR(50) NOT NULL,
+    Product VARCHAR(100) NOT NULL,
+    Category VARCHAR(30) NOT NULL,
+    Units_Sold INT NOT NULL,
+    Unit_Price DECIMAL(10,2) NOT NULL,
+    Total_Revenue DECIMAL(12,2) NOT NULL,
+    Order_Date DATE NOT NULL,
+    Cost DECIMAL(12,2) NOT NULL,
+    INDEX idx_region (Region),
+    INDEX idx_date (Order_Date),
+    INDEX idx_category (Category)
+);
+
+-- Regions Table
+CREATE TABLE Regions (
+    Region VARCHAR(20) PRIMARY KEY,
+    Region_Manager VARCHAR(50) NOT NULL,
+    Target_Revenue DECIMAL(12,2) NOT NULL,
+    Population INT NOT NULL,
+    Area_SqKm INT NOT NULL
+);
+
+-- Products Table
+CREATE TABLE Products (
+    Product VARCHAR(100) PRIMARY KEY,
+    Category VARCHAR(30) NOT NULL,
+    Supplier VARCHAR(50) NOT NULL,
+    Launch_Date DATE NOT NULL,
+    Warranty_Months INT NOT NULL,
+    INDEX idx_category (Category)
+);
+
+-- Sales Representatives Table
+CREATE TABLE Sales_Reps (
+    Sales_Rep VARCHAR(50) PRIMARY KEY,
+    Region VARCHAR(20) NOT NULL,
+    Hire_Date DATE NOT NULL,
+    Target_Revenue DECIMAL(12,2) NOT NULL,
+    Commission_Rate DECIMAL(4,2) NOT NULL,
+    FOREIGN KEY (Region) REFERENCES Regions(Region)
+);
+
+-- =====================================================
+-- Insert Sample Data
+-- =====================================================
+
+-- Insert Regions Data
+INSERT INTO Regions (Region, Region_Manager, Target_Revenue, Population, Area_SqKm) VALUES
+('North', 'Robert Wilson', 500000.00, 2500000, 125000),
+('South', 'Amanda Davis', 450000.00, 2200000, 110000),
+('East', 'David Kim', 400000.00, 1800000, 95000),
+('West', 'Jennifer Garcia', 550000.00, 2800000, 140000);
+
+-- Insert Products Data
+INSERT INTO Products (Product, Category, Supplier, Launch_Date, Warranty_Months) VALUES
+('Laptop Pro', 'Electronics', 'TechCorp', '2023-01-15', 24),
+('Office Chair', 'Furniture', 'ComfortSeating', '2022-06-10', 12),
+('Wireless Mouse', 'Electronics', 'TechCorp', '2023-03-20', 6),
+('Standing Desk', 'Furniture', 'ErgoFurniture', '2022-11-05', 36),
+('Keyboard', 'Electronics', 'TechCorp', '2023-02-14', 12),
+('Monitor', 'Electronics', 'DisplayTech', '2023-04-01', 24),
+('Desk Lamp', 'Furniture', 'LightingSolutions', '2022-08-15', 6),
+('Tablet', 'Electronics', 'MobileTech', '2023-05-10', 12),
+('Bookshelf', 'Furniture', 'WoodCrafters', '2022-09-20', 24),
+('Webcam', 'Electronics', 'VideoTech', '2023-06-01', 12),
+('Smartphone', 'Electronics', 'MobileTech', '2023-07-01', 12),
+('Desk Organizer', 'Office Supplies', 'OfficeMax', '2022-12-01', 6),
+('Whiteboard', 'Office Supplies', 'BoardCorp', '2023-02-01', 12),
+('Projector', 'Electronics', 'DisplayTech', '2023-08-01', 24),
+('Notebook Set', 'Office Supplies', 'PaperPlus', '2022-09-15', 3);
+
+-- Insert Sales Representatives Data
+INSERT INTO Sales_Reps (Sales_Rep, Region, Hire_Date, Target_Revenue, Commission_Rate) VALUES
+('John Smith', 'North', '2022-01-15', 125000.00, 0.05),
+('Sarah Johnson', 'South', '2021-11-20', 112500.00, 0.05),
+('Mike Chen', 'East', '2022-03-10', 100000.00, 0.06),
+('Lisa Brown', 'West', '2021-09-05', 137500.00, 0.04);
+
+-- Insert Sales Data
+INSERT INTO Sales (Order_ID, Region, Sales_Rep, Product, Category, Units_Sold, Unit_Price, Total_Revenue, Order_Date, Cost) VALUES
+('ORD001', 'North', 'John Smith', 'Laptop Pro', 'Electronics', 2, 1200.00, 2400.00, '2024-01-15', 1800.00),
+('ORD002', 'South', 'Sarah Johnson', 'Office Chair', 'Furniture', 5, 250.00, 1250.00, '2024-01-16', 875.00),
+('ORD003', 'East', 'Mike Chen', 'Wireless Mouse', 'Electronics', 10, 45.00, 450.00, '2024-01-17', 300.00),
+('ORD004', 'West', 'Lisa Brown', 'Standing Desk', 'Furniture', 1, 800.00, 800.00, '2024-01-18', 560.00),
+('ORD005', 'North', 'John Smith', 'Keyboard', 'Electronics', 8, 75.00, 600.00, '2024-01-19', 400.00),
+('ORD006', 'South', 'Sarah Johnson', 'Monitor', 'Electronics', 3, 350.00, 1050.00, '2024-01-20', 735.00),
+('ORD007', 'East', 'Mike Chen', 'Desk Lamp', 'Furniture', 6, 120.00, 720.00, '2024-01-21', 432.00),
+('ORD008', 'West', 'Lisa Brown', 'Tablet', 'Electronics', 4, 500.00, 2000.00, '2024-01-22', 1400.00),
+('ORD009', 'North', 'John Smith', 'Bookshelf', 'Furniture', 2, 300.00, 600.00, '2024-01-23', 420.00),
+('ORD010', 'South', 'Sarah Johnson', 'Webcam', 'Electronics', 7, 80.00, 560.00, '2024-01-24', 392.00),
+('ORD011', 'East', 'Mike Chen', 'Projector', 'Electronics', 1, 1000.00, 1000.00, '2024-01-25', 700.00),
+('ORD012', 'West', 'Lisa Brown', 'Office Chair', 'Furniture', 3, 450.00, 1350.00, '2024-01-26', 945.00),
+('ORD013', 'North', 'John Smith', 'Smartphone', 'Electronics', 2, 800.00, 1600.00, '2024-01-27', 1120.00),
+('ORD014', 'South', 'Sarah Johnson', 'Desk Organizer', 'Office Supplies', 15, 25.00, 375.00, '2024-01-28', 225.00),
+('ORD015', 'East', 'Mike Chen', 'Whiteboard', 'Office Supplies', 3, 150.00, 450.00, '2024-01-29', 270.00),
+('ORD016', 'West', 'Lisa Brown', 'Notebook Set', 'Office Supplies', 20, 15.00, 300.00, '2024-01-30', 180.00),
+('ORD017', 'North', 'John Smith', 'Wireless Mouse', 'Electronics', 12, 45.00, 540.00, '2024-02-01', 360.00),
+('ORD018', 'South', 'Sarah Johnson', 'Standing Desk', 'Furniture', 2, 800.00, 1600.00, '2024-02-02', 1120.00),
+('ORD019', 'East', 'Mike Chen', 'Laptop Pro', 'Electronics', 1, 1200.00, 1200.00, '2024-02-03', 900.00),
+('ORD020', 'West', 'Lisa Brown', 'Keyboard', 'Electronics', 6, 75.00, 450.00, '2024-02-04', 300.00);
+
+-- =====================================================
+-- Create Views for Analysis
+-- =====================================================
+
+-- Monthly Sales Summary View
+CREATE VIEW Monthly_Sales_Summary AS
+SELECT 
+    DATE_FORMAT(Order_Date, '%Y-%m') AS Month_Year,
+    Region,
+    Category,
+    SUM(Total_Revenue) AS Total_Revenue,
+    SUM(Units_Sold) AS Total_Units,
+    SUM(Total_Revenue - Cost) AS Total_Profit,
+    COUNT(*) AS Total_Orders
+FROM Sales
+GROUP BY DATE_FORMAT(Order_Date, '%Y-%m'), Region, Category;
+
+-- Sales Rep Performance View
+CREATE VIEW Sales_Rep_Performance AS
+SELECT 
+    s.Sales_Rep,
+    s.Region,
+    COUNT(*) AS Total_Orders,
+    SUM(s.Total_Revenue) AS Total_Revenue,
+    SUM(s.Total_Revenue - s.Cost) AS Total_Profit,
+    AVG(s.Total_Revenue) AS Avg_Order_Value,
+    sr.Target_Revenue,
+    ROUND((SUM(s.Total_Revenue) / sr.Target_Revenue) * 100, 2) AS Target_Achievement_Percent
+FROM Sales s
+JOIN Sales_Reps sr ON s.Sales_Rep = sr.Sales_Rep
+GROUP BY s.Sales_Rep, s.Region, sr.Target_Revenue;
+
+-- Product Performance View
+CREATE VIEW Product_Performance AS
+SELECT 
+    p.Product,
+    p.Category,
+    p.Supplier,
+    COUNT(s.Order_ID) AS Total_Orders,
+    SUM(s.Units_Sold) AS Total_Units_Sold,
+    SUM(s.Total_Revenue) AS Total_Revenue,
+    SUM(s.Total_Revenue - s.Cost) AS Total_Profit,
+    ROUND(AVG(s.Unit_Price), 2) AS Avg_Unit_Price
+FROM Products p
+LEFT JOIN Sales s ON p.Product = s.Product
+GROUP BY p.Product, p.Category, p.Supplier;
+
+-- Regional Performance View
+CREATE VIEW Regional_Performance AS
+SELECT 
+    r.Region,
+    r.Region_Manager,
+    r.Target_Revenue,
+    COUNT(s.Order_ID) AS Total_Orders,
+    SUM(s.Total_Revenue) AS Actual_Revenue,
+    SUM(s.Total_Revenue - s.Cost) AS Total_Profit,
+    ROUND((SUM(s.Total_Revenue) / r.Target_Revenue) * 100, 2) AS Target_Achievement_Percent,
+    ROUND(SUM(s.Total_Revenue) / r.Population * 1000000, 2) AS Revenue_Per_Million_Population
+FROM Regions r
+LEFT JOIN Sales s ON r.Region = s.Region
+GROUP BY r.Region, r.Region_Manager, r.Target_Revenue, r.Population;
+
+-- =====================================================
+-- Indexes for Performance
+-- =====================================================
+
+-- Additional indexes for better query performance
+CREATE INDEX idx_sales_rep_date ON Sales(Sales_Rep, Order_Date);
+CREATE INDEX idx_product_date ON Sales(Product, Order_Date);
+CREATE INDEX idx_revenue ON Sales(Total_Revenue);
+CREATE INDEX idx_profit ON Sales(Total_Revenue, Cost);
+
+-- =====================================================
+-- Sample Queries for Testing
+-- =====================================================
+
+-- Test query to verify data
+SELECT 'Data loaded successfully' AS Status, COUNT(*) AS Total_Records FROM Sales;
+SELECT 'Regions loaded' AS Status, COUNT(*) AS Total_Regions FROM Regions;
+SELECT 'Products loaded' AS Status, COUNT(*) AS Total_Products FROM Products;
+SELECT 'Sales Reps loaded' AS Status, COUNT(*) AS Total_Reps FROM Sales_Reps;
