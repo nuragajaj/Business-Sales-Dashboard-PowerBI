@@ -1,0 +1,11 @@
+Order_ID,Region,Sales_Rep,Product,Category,Units_Sold,Unit_Price,Total_Revenue,Order_Date,Cost
+ORD001,North,John Smith,Laptop Pro,Electronics,2,1200,2400,2024-01-15,1800
+ORD002,South,Sarah Johnson,Office Chair,Furniture,5,250,1250,2024-01-16,875
+ORD003,East,Mike Chen,Wireless Mouse,Electronics,10,45,450,2024-01-17,300
+ORD004,West,Lisa Brown,Standing Desk,Furniture,1,800,800,2024-01-18,560
+ORD005,North,John Smith,Keyboard,Electronics,8,75,600,2024-01-19,400
+ORD006,South,Sarah Johnson,Monitor,Electronics,3,350,1050,2024-01-20,735
+ORD007,East,Mike Chen,Desk Lamp,Furniture,6,120,720,2024-01-21,432
+ORD008,West,Lisa Brown,Tablet,Electronics,4,500,2000,2024-01-22,1400
+ORD009,North,John Smith,Bookshelf,Furniture,2,300,600,2024-01-23,420
+ORD010,South,Sarah Johnson,Webcam,Electronics,7,80,560,2024-01-24,392
