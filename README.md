@@ -34,13 +34,6 @@ Interactive Power BI dashboard analyzing sales performance across regions with k
 - **region_data.csv** - Regional information
 - **product_data.csv** - Product catalog
 
-## 🔧 Key DAX Measures
-```dax
-Total Revenue = SUM(Sales[Total_Revenue])
-Profit Margin % = DIVIDE([Total Profit], [Total Revenue], 0) * 100
-YoY Growth = DIVIDE([Current Year] - [Previous Year], [Previous Year], 0) * 100
-```
-
 ## 📈 Dashboard Components
 - 💰 KPI Cards (Revenue, Units, Profit Margin)
 - 📊 Revenue trend line chart
@@ -78,7 +71,7 @@ YoY Growth = DIVIDE([Current Year] - [Previous Year], [Previous Year], 0) * 100
 
 ## 📞 Contact
 - **LinkedIn:** https://www.linkedin.com/in/arungajraj/
-- **Email:** arungajraj2003@.com
+- **Email:** arungajraj2003@gmail.com
 ---
 ⭐ **Star this repository if you found it helpful!**
 ```
